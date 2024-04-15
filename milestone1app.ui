@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1081</width>
-    <height>980</height>
+    <width>1078</width>
+    <height>1034</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,8 +25,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1081</width>
-      <height>961</height>
+      <width>1071</width>
+      <height>991</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -41,8 +41,8 @@ border-color: rgb(0, 0, 0);</string>
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>1081</width>
-       <height>893</height>
+       <width>1071</width>
+       <height>923</height>
       </rect>
      </property>
      <attribute name="label">
@@ -505,8 +505,8 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>1081</width>
-       <height>893</height>
+       <width>1071</width>
+       <height>923</height>
       </rect>
      </property>
      <attribute name="label">
@@ -520,7 +520,7 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1081</width>
+     <width>1078</width>
      <height>21</height>
     </rect>
    </property>
