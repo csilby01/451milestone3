@@ -1,0 +1,9 @@
+Attribute tuple count = 227536
+Business tuple count = 11481
+Categories tuple count = 33619
+Checkin tuple count = 481360
+Elite tuple count = 68046
+Friends tuple count = 1052706
+Hours tuple count = 55502
+Reviews tuple count = 416479
+Users tuple count = 192999
