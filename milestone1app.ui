@@ -59,7 +59,8 @@ border-color: rgb(0, 0, 0);</string>
       </property>
       <property name="styleSheet">
        <string notr="true">font: 12pt &quot;Lucida Sans Unicode&quot;;
-background-color: rgb(181, 206, 227);</string>
+background-color: rgb(181, 206, 227);
+color: (0, 0, 0);</string>
       </property>
       <property name="title">
        <string>Location</string>
@@ -110,7 +111,7 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
          <x>70</x>
          <y>90</y>
          <width>111</width>
-         <height>111</height>
+         <height>121</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -122,7 +123,7 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
        <property name="geometry">
         <rect>
          <x>210</x>
-         <y>60</y>
+         <y>20</y>
          <width>71</width>
          <height>21</height>
         </rect>
@@ -135,14 +136,34 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
        <property name="geometry">
         <rect>
          <x>210</x>
-         <y>90</y>
+         <y>50</y>
          <width>111</width>
-         <height>111</height>
+         <height>121</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(255, 255, 255);
 font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="clearButton">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>180</y>
+         <width>71</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(240, 255, 238);
+</string>
+       </property>
+       <property name="text">
+        <string>Clear</string>
        </property>
       </widget>
      </widget>
@@ -157,6 +178,7 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">font: 12pt &quot;Lucida Sans Unicode&quot;;
+color: rgb(0, 0, 0);
 background-color: rgb(181, 206, 227);</string>
       </property>
       <property name="title">
@@ -291,6 +313,7 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">font: 12pt &quot;Lucida Sans Unicode&quot;;
+color: rgb(0, 0, 0);
 background-color: rgb(181, 206, 227);</string>
       </property>
       <property name="title">
@@ -397,6 +420,7 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">font: 12pt &quot;Lucida Sans Unicode&quot;;
+color: rgb(0, 0, 0);
 background-color: rgb(181, 206, 227);</string>
       </property>
       <property name="title">
