@@ -20,7 +20,7 @@ class milestone1(QMainWindow):
 
     def executeQuery(self, sql_str):
         try: 
-            conn = psycopg2.connect("dbname='Milestone2DB' user='postgres' host='localhost' password='password'") #  password='mustafa'
+            conn = psycopg2.connect("dbname='Milestone2DB' user='postgres' host='localhost' password='14charlie'") #  password='mustafa'
         except:
             print('Unable  to connect to database!')
         cur = conn.cursor()
@@ -115,6 +115,9 @@ class milestone1(QMainWindow):
 
     def zipChanged(self):
         self.ui.categoryList.clear()
+        self.ui.avgIncome.clear()
+        self.ui.population.clear()
+        self.ui.numBusiness.clear()
         if (len(self.ui.cityList.selectedItems()) > 0) and (len(self.ui.zipList.selectedItems()) > 0):
             state = self.ui.stateList.currentText()
             city = self.ui.cityList.selectedItems()[0].text()
@@ -123,7 +126,7 @@ class milestone1(QMainWindow):
             for i in reversed(range(self.ui.businessTable.rowCount())):
                 self.ui.businessTable.removeRow(i)
             try:
-                print("i")
+                print(i)
                 results = self.executeQuery(sql_str)
                 print(sql_str)
                 style = "::section {""background-color: #f3f3f3; }"
@@ -152,6 +155,79 @@ class milestone1(QMainWindow):
                 self.ui.categoryList.addItem(str(row[0]))
             # except:
             #     print("category Query Failed")
+        
+            sql_str = "SELECT meanincome FROM zipcodedata WHERE zipcode = '" + str(zip) + "';"
+            try:
+                results = self.executeQuery(sql_str)
+                for row in results:
+                    self.ui.avgIncome.addItem(str(row[0]))
+            except:
+                print("income Query Failed")
+
+            sql_str = "SELECT population FROM zipcodedata WHERE zipcode = '" + str(zip) + "';"
+            try:
+                results = self.executeQuery(sql_str)
+                for row in results:
+                    self.ui.population.addItem(str(row[0]))
+            except:
+                print("population Query Failed")
+
+            sql_str = "SELECT COUNT(business_id) FROM business WHERE postal_code  = " + str(zip) + ";"
+            try:
+                results = self.executeQuery(sql_str)
+                for row in results:
+                    self.ui.numBusiness.addItem(str(row[0]))
+            except:
+                print("zip Query Failed")
+
+
+            sql_str = "SELECT category_name, COUNT(category_name) FROM categories as cat JOIN business as bus ON cat.business_id = bus.business_id WHERE postal_code = " + str(zip) + " GROUP BY category_name ORDER BY COUNT(category_name) DESC"
+            for i in reversed(range(self.ui.categoryTable.rowCount())):
+                self.ui.categoryTable.removeRow(i)
+            
+            print(i)
+            results = self.executeQuery(sql_str)
+            print(sql_str)
+            style = "::section {""background-color: #f3f3f3; }"
+            self.ui.categoryTable.horizontalHeader().setStyleSheet(style)
+            self.ui.categoryTable.setColumnCount(len(results[0]))
+            self.ui.categoryTable.setRowCount(len(results))
+            self.ui.categoryTable.setHorizontalHeaderLabels(['Category Name', '# of Businesses'])
+            self.ui.categoryTable.resizeColumnsToContents()
+            self.ui.categoryTable.setColumnWidth(0,200)
+            self.ui.categoryTable.setColumnWidth(1,161)
+            currentRow = 0
+            print("u")
+            for row in results:
+                print(row)
+                for colCount in range(0, len(results[0])):
+                    print(row[colCount])
+                    self.ui.categoryTable.setItem(currentRow, colCount, QTableWidgetItem(str(row[colCount])))
+                currentRow +=1
+
+            
+                
+#sql query for popular categories - needs to be based on the state, city, zip
+# """SELECT category_name, COUNT(category_name)
+# FROM categories as cat
+# JOIN business as bus ON cat.business_id = bus.business_id
+# GROUP BY category_name
+# ORDER BY COUNT(category_name) DESC"""
+                
+
+#sql query for getting businesses that belong to a specific category
+# """SELECT DISTINCT name
+# FROM business as bus
+# JOIN categories as cat ON bus.business_id = cat.business_id
+# WHERE category_name = " + category_name "
+# ORDER BY name"""
+
+
+#sql query for getting population and avg income
+# """SELECT meanIncome, population
+# FROM zipcodedata
+# WHERE zipcode = "+ zip +"
+# ORDER BY population DESC"""
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = milestone1()
