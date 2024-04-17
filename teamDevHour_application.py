@@ -154,7 +154,6 @@ class milestone1(QMainWindow):
                 self.ui.businessTable.setColumnWidth(1,100)
                 self.ui.businessTable.setColumnWidth(2,50)
                 currentRow = 0
-                print("u")
                 for row in results:
                     for colCount in range(0, len(results[0])):
                         self.ui.businessTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
@@ -209,7 +208,6 @@ class milestone1(QMainWindow):
             currentRow = 0
             for row in results:
                 for colCount in range(0, len(results[0])):
-                    print(row[colCount])
                     self.ui.categoryTable.setItem(currentRow, colCount, QTableWidgetItem(str(row[colCount])))
                 currentRow +=1
             
@@ -283,7 +281,6 @@ class milestone1(QMainWindow):
                 self.ui.businessTable.setColumnWidth(1,100)
                 self.ui.businessTable.setColumnWidth(2,50)
                 currentRow = 0
-                print("u")
                 for row in results:
                     for colCount in range(0, len(results[0])):
                         self.ui.businessTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
