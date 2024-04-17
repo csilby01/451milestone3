@@ -70,12 +70,11 @@ class milestone1(QMainWindow):
         self.ui.zipList.clear()
         self.ui.categoryList.clear()
         state = self.ui.stateList.currentText()
-        for i in reversed(range(self.ui.popularTable.rowCount())):
-            self.ui.popularTable.removeRow(i)
-        for i in reversed(range(self.ui.successfulTable.rowCount())):
-            self.ui.successfulTable.removeRow(i)
-        for i in reversed(range(self.ui.categoryTable.rowCount())):
-            self.ui.categoryTable.removeRow(i)
+        self.clearTable(self.ui.categoryTable)
+        self.clearTable(self.ui.successfulTable)
+        self.clearTable(self.ui.popularTable)
+        self.clearTable(self.ui.businessTable)
+
         if (self.ui.stateList.currentIndex() >= 0):
             sql_str = "SELECT DISTINCT city FROM business WHERE state='" + state + "' ORDER BY city;"
             try:
@@ -85,10 +84,6 @@ class milestone1(QMainWindow):
             except:
                 print("SC Query Failed")
 
-        #self.ui.businessTable.clear()
-        #city = self.ui.cityList.currentItem()
-        for i in reversed(range(self.ui.businessTable.rowCount())):
-            self.ui.businessTable.removeRow(i)
         sql_str ="SELECT name, city, state FROM business WHERE state= '" + state + "' ORDER BY name;" 
         try:
             results = self.executeQuery(sql_str)
@@ -112,13 +107,9 @@ class milestone1(QMainWindow):
     def cityChanged(self):
         self.ui.zipList.clear()
         self.ui.categoryList.clear()
-        for i in reversed(range(self.ui.popularTable.rowCount())):
-            self.ui.popularTable.removeRow(i)
-        for i in reversed(range(self.ui.successfulTable.rowCount())):
-            self.ui.successfulTable.removeRow(i)
-        for i in reversed(range(self.ui.categoryTable.rowCount())):
-            self.ui.categoryTable.removeRow(i)
-
+        self.clearTable(self.ui.categoryTable)
+        self.clearTable(self.ui.successfulTable)
+        self.clearTable(self.ui.popularTable)
         if (self.ui.stateList.currentIndex() >=0 ) and (len(self.ui.cityList.selectedItems()) > 0):
             city = self.ui.cityList.selectedItems()[0].text()
             state = self.ui.stateList.currentText()
@@ -130,8 +121,7 @@ class milestone1(QMainWindow):
             except:
                 print("zip Query Failed")
             sql_str ="SELECT name, city, state FROM business WHERE city='" + city + "' AND state='" + state + "' ORDER BY name;" 
-            for i in reversed(range(self.ui.businessTable.rowCount())):
-                self.ui.businessTable.removeRow(i)
+            self.clearTable(self.ui.businessTable)
             try:
                 results = self.executeQuery(sql_str)
                 style = "::section {""background-color: #f3f3f3; }"
@@ -161,8 +151,7 @@ class milestone1(QMainWindow):
             city = self.ui.cityList.selectedItems()[0].text()
             zip = self.ui.zipList.selectedItems()[0].text()
             sql_str ="SELECT name, city, state FROM business WHERE city='" + city + "' AND state='" + state + "' AND postal_code=" + zip + " ORDER BY name;" 
-            for i in reversed(range(self.ui.businessTable.rowCount())):
-                self.ui.businessTable.removeRow(i)
+            self.clearTable(self.ui.businessTable)
             try:
                 results = self.executeQuery(sql_str)
                 print(sql_str)
@@ -215,8 +204,7 @@ class milestone1(QMainWindow):
 
 
             sql_str = "SELECT category_name, COUNT(category_name) FROM categories as cat JOIN business as bus ON cat.business_id = bus.business_id WHERE postal_code = " + str(zip) + " GROUP BY category_name ORDER BY COUNT(category_name) DESC"
-            for i in reversed(range(self.ui.categoryTable.rowCount())):
-                self.ui.categoryTable.removeRow(i)
+            self.clearTable(self.ui.categoryTable)
             results = self.executeQuery(sql_str)
             print(sql_str)
             style = "::section {""background-color: #f3f3f3; }"
@@ -235,8 +223,7 @@ class milestone1(QMainWindow):
             
             # Successful Business Table
             sql_str = "SELECT name, city, state AS avgReviewCount FROM Business JOIN Categories AS Cat on Business.business_id = Cat.business_id JOIN(SELECT AVG(review_count) AS averageReviews, category_name FROM Business JOIN Categories on Business.business_id = Categories.business_id GROUP BY category_name) AS Average ON Average.category_name = Cat.category_name GROUP BY Business.business_id, business.name HAVING review_count > AVG(averageReviews) AND reviewrating >= 4.0 AND postal_code = " + str(zip) + " ORDER BY reviewrating DESC"
-            for i in reversed(range(self.ui.successfulTable.rowCount())):
-                self.ui.successfulTable.removeRow(i)
+            self.clearTable(self.ui.successfulTable)
             try:
                 print(sql_str)
                 results = self.executeQuery(sql_str)
@@ -259,8 +246,7 @@ class milestone1(QMainWindow):
 
             # Popular Business Table
             sql_str = "SELECT Business.name, Business.city, Business.state FROM Business JOIN (SELECT AVG(numCheckins) AS avgCheckins, postal_code FROM Business GROUP BY postal_code) AS Average ON Business.postal_code = Average.postal_code WHERE numCheckins > avgCheckins AND Business.postal_code = " + str(zip) +" ORDER BY Business.reviewrating;"
-            for i in reversed(range(self.ui.popularTable.rowCount())):
-                self.ui.popularTable.removeRow(i)
+            self.clearTable(self.ui.popularTable)
             try:
                 print(sql_str)
                 results = self.executeQuery(sql_str)
@@ -288,8 +274,7 @@ class milestone1(QMainWindow):
             zip = self.ui.zipList.selectedItems()[0].text()
             category = self.ui.categoryList.selectedItems()[0].text()
             sql_str ="SELECT name, city, state FROM business JOIN Categories ON Business.business_id = Categories.business_id WHERE city='" + city + "' AND state='" + state + "' AND postal_code=" + zip + " AND category_name = '" + category  + "' ORDER BY name;" 
-            for i in reversed(range(self.ui.businessTable.rowCount())):
-                self.ui.businessTable.removeRow(i)
+            self.clearTable(self.ui.businessTable)
             try:    
                 results = self.executeQuery(sql_str)
                 print(sql_str)
