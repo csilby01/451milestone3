@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1075</width>
-    <height>898</height>
+    <height>889</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,12 +26,13 @@
       <x>0</x>
       <y>0</y>
       <width>1071</width>
-      <height>991</height>
+      <height>881</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">font: 12pt &quot;Lucida Sans Unicode&quot;;
-border-color: rgb(0, 0, 0);</string>
+border-color: rgb(0, 0, 0);
+border-radius: 12px;</string>
     </property>
     <property name="currentIndex">
      <number>0</number>
@@ -42,7 +43,7 @@ border-color: rgb(0, 0, 0);</string>
        <x>0</x>
        <y>0</y>
        <width>1071</width>
-       <height>923</height>
+       <height>813</height>
       </rect>
      </property>
      <attribute name="label">
@@ -228,13 +229,13 @@ background-color: rgb(181, 206, 227);</string>
         <rect>
          <x>150</x>
          <y>40</y>
-         <width>161</width>
+         <width>91</width>
          <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(255, 255, 255);
-font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
+font: 15pt &quot;Lucida Sans Unicode&quot;;</string>
        </property>
       </widget>
       <widget class="QListWidget" name="population">
@@ -242,13 +243,13 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
         <rect>
          <x>150</x>
          <y>110</y>
-         <width>161</width>
+         <width>91</width>
          <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(255, 255, 255);
-font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
+font: 15pt &quot;Lucida Sans Unicode&quot;;</string>
        </property>
       </widget>
       <widget class="QListWidget" name="avgIncome">
@@ -256,13 +257,13 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
         <rect>
          <x>150</x>
          <y>180</y>
-         <width>161</width>
+         <width>91</width>
          <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(255, 255, 255);
-font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
+font: 15pt &quot;Lucida Sans Unicode&quot;;</string>
        </property>
       </widget>
       <widget class="QTableWidget" name="categoryTable">
@@ -270,7 +271,7 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
         <rect>
          <x>340</x>
          <y>40</y>
-         <width>361</width>
+         <width>371</width>
          <height>171</height>
         </rect>
        </property>
@@ -314,7 +315,8 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
       <property name="styleSheet">
        <string notr="true">font: 12pt &quot;Lucida Sans Unicode&quot;;
 color: rgb(0, 0, 0);
-background-color: rgb(181, 206, 227);</string>
+background-color: rgb(181, 206, 227);
+border-radius: 12px;</string>
       </property>
       <property name="title">
        <string>Filter By Category</string>
@@ -354,7 +356,7 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
         <rect>
          <x>170</x>
          <y>50</y>
-         <width>871</width>
+         <width>881</width>
          <height>241</height>
         </rect>
        </property>
@@ -370,6 +372,9 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
        </attribute>
        <attribute name="verticalHeaderVisible">
         <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderDefaultSectionSize">
+        <number>60</number>
        </attribute>
       </widget>
       <widget class="QLabel" name="label_9">
@@ -388,20 +393,25 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
         <string>Businesses</string>
        </property>
       </widget>
+      <zorder>label_9</zorder>
+      <zorder>label_8</zorder>
+      <zorder>categoryList</zorder>
+      <zorder>businessTable</zorder>
      </widget>
      <widget class="QGroupBox" name="groupBox_3">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>540</y>
-        <width>1051</width>
+        <width>1061</width>
         <height>271</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">font: 12pt &quot;Lucida Sans Unicode&quot;;
 color: rgb(0, 0, 0);
-background-color: rgb(181, 206, 227);</string>
+background-color: rgb(181, 206, 227);
+border-radius:12px;</string>
       </property>
       <property name="title">
        <string/>
@@ -412,35 +422,13 @@ background-color: rgb(181, 206, 227);</string>
          <x>20</x>
          <y>50</y>
          <width>481</width>
-         <height>211</height>
+         <height>201</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(255, 255, 255);
-font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
-       </property>
-       <attribute name="horizontalHeaderVisible">
-        <bool>true</bool>
-       </attribute>
-       <attribute name="horizontalHeaderStretchLastSection">
-        <bool>true</bool>
-       </attribute>
-       <attribute name="verticalHeaderVisible">
-        <bool>false</bool>
-       </attribute>
-      </widget>
-      <widget class="QTableWidget" name="popularTable">
-       <property name="geometry">
-        <rect>
-         <x>560</x>
-         <y>50</y>
-         <width>481</width>
-         <height>211</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
+font: 10pt &quot;Lucida Sans Unicode&quot;;
+border-radius: 12px;</string>
        </property>
        <attribute name="horizontalHeaderVisible">
         <bool>true</bool>
@@ -461,23 +449,93 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
          <height>21</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(0, 170, 0);</string>
+       </property>
        <property name="text">
         <string>Successful Businesses (in zipcode)</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_11">
+      <widget class="QFrame" name="frame">
        <property name="geometry">
         <rect>
-         <x>560</x>
-         <y>20</y>
-         <width>291</width>
-         <height>21</height>
+         <x>10</x>
+         <y>10</y>
+         <width>511</width>
+         <height>251</height>
         </rect>
        </property>
-       <property name="text">
-        <string>Popular Businesses (in zipcode)</string>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(0, 170, 0);
+border-radius: 12px;</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
       </widget>
+      <widget class="QFrame" name="frame_2">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>10</y>
+         <width>511</width>
+         <height>251</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(150,80, 80);
+border-radius: 12px;</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QTableWidget" name="popularTable">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>481</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 255, 255);
+font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+       </widget>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>291</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Popular Businesses (in zipcode)</string>
+        </property>
+       </widget>
+      </widget>
+      <zorder>frame_2</zorder>
+      <zorder>frame</zorder>
+      <zorder>successfulTable</zorder>
+      <zorder>label_10</zorder>
      </widget>
     </widget>
     <widget class="QWidget" name="page_2">
@@ -485,8 +543,8 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>98</width>
-       <height>28</height>
+       <width>1071</width>
+       <height>813</height>
       </rect>
      </property>
      <attribute name="label">
