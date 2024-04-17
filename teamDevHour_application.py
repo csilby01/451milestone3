@@ -18,6 +18,28 @@ class milestone1(QMainWindow):
         self.ui.cityList.itemSelectionChanged.connect(self.cityChanged)
         self.ui.zipList.itemSelectionChanged.connect(self.zipChanged)
         self.ui.categoryList.itemSelectionChanged.connect(self.categoryChanged)
+        self.ui.clearButton.clicked.connect(self.clearAll)  
+
+    def clearAll(self):
+        self.ui.stateList.setCurrentIndex(-1)
+        self.ui.stateList.clearEditText()
+        
+        self.ui.cityList.clear()
+        self.ui.zipList.clear()
+        self.ui.categoryList.clear()
+
+        self.ui.avgIncome.clear()
+        self.ui.population.clear()
+        self.ui.numBusiness.clear()
+
+        self.clearTable(self.ui.businessTable)
+        self.clearTable(self.ui.categoryTable)
+        self.clearTable(self.ui.successfulTable)
+        self.clearTable(self.ui.popularTable)
+
+    def clearTable(self, table):
+        for i in reversed(range(table.rowCount())):
+            table.removeRow(i)
 
     def executeQuery(self, sql_str):
         try: 
