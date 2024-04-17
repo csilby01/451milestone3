@@ -197,14 +197,57 @@ class milestone1(QMainWindow):
             self.ui.categoryTable.setColumnWidth(0,200)
             self.ui.categoryTable.setColumnWidth(1,161)
             currentRow = 0
-            print("u")
             for row in results:
-                print(row)
                 for colCount in range(0, len(results[0])):
                     print(row[colCount])
                     self.ui.categoryTable.setItem(currentRow, colCount, QTableWidgetItem(str(row[colCount])))
                 currentRow +=1
+            
+            # Successful Business Table
+            sql_str = 
+            for i in reversed(range(self.ui.successfulTable.rowCount())):
+                self.ui.successfulTable.removeRow(i)
+            
+            print(i)
+            print(sql_str)
+            results = self.executeQuery(sql_str)
+            style = "::section {""background-color: #f3f3f3; }"
+            self.ui.businessTable.horizontalHeader().setStyleSheet(style)
+            self.ui.businessTable.setColumnCount(len(results[0]))
+            self.ui.businessTable.setRowCount(len(results))
+            self.ui.businessTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
+            self.ui.businessTable.resizeColumnsToContents()
+            self.ui.businessTable.setColumnWidth(0,300)
+            self.ui.businessTable.setColumnWidth(1,100)
+            self.ui.businessTable.setColumnWidth(2,50)
+            currentRow = 0
+            for row in results:
+                for colCount in range(0, len(results[0])):
+                    self.ui.successfulTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
+                currentRow +=1
 
+            #Popular Business Table
+            sql_str = 
+            for i in reversed(range(self.ui.popularTable.rowCount())):
+                self.ui.popularTable.removeRow(i)
+            
+            print(i)
+            print(sql_str)
+            results = self.executeQuery(sql_str)
+            style = "::section {""background-color: #f3f3f3; }"
+            self.ui.businessTable.horizontalHeader().setStyleSheet(style)
+            self.ui.businessTable.setColumnCount(len(results[0]))
+            self.ui.businessTable.setRowCount(len(results))
+            self.ui.businessTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
+            self.ui.businessTable.resizeColumnsToContents()
+            self.ui.businessTable.setColumnWidth(0,300)
+            self.ui.businessTable.setColumnWidth(1,100)
+            self.ui.businessTable.setColumnWidth(2,50)
+            currentRow = 0
+            for row in results:
+                for colCount in range(0, len(results[0])):
+                    self.ui.popularTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
+                currentRow +=1
             
                 
 #sql query for popular categories - needs to be based on the state, city, zip
