@@ -16,7 +16,8 @@ class milestone1(QMainWindow):
         self.loadStateList()
         self.ui.stateList.currentTextChanged.connect(self.stateChanged)
         self.ui.cityList.itemSelectionChanged.connect(self.cityChanged)
-        self.ui.zipList.itemSelectionChanged.connect(self.zipChanged) 
+        self.ui.zipList.itemSelectionChanged.connect(self.zipChanged)
+        self.ui.categoryList.itemSelectionChanged.connect(self.categoryChanged)
 
     def executeQuery(self, sql_str):
         try: 
@@ -44,6 +45,8 @@ class milestone1(QMainWindow):
 
     def stateChanged(self):
         self.ui.cityList.clear()
+        self.ui.zipList.clear()
+        self.ui.categoryList.clear()
         state = self.ui.stateList.currentText()
         if (self.ui.stateList.currentIndex() >= 0):
             sql_str = "SELECT DISTINCT city FROM business WHERE state='" + state + "' ORDER BY city;"
@@ -207,51 +210,81 @@ class milestone1(QMainWindow):
             sql_str = "SELECT name, city, state AS avgReviewCount FROM Business JOIN Categories AS Cat on Business.business_id = Cat.business_id JOIN(SELECT AVG(review_count) AS averageReviews, category_name FROM Business JOIN Categories on Business.business_id = Categories.business_id GROUP BY category_name) AS Average ON Average.category_name = Cat.category_name GROUP BY Business.business_id, business.name HAVING review_count > AVG(averageReviews) AND reviewrating >= 4.0 AND postal_code = " + str(zip) + " ORDER BY reviewrating DESC"
             for i in reversed(range(self.ui.successfulTable.rowCount())):
                 self.ui.successfulTable.removeRow(i)
-            
-            print(i)
-            print(sql_str)
-            results = self.executeQuery(sql_str)
-            style = "::section {""background-color: #f3f3f3; }"
-            self.ui.successfulTable.horizontalHeader().setStyleSheet(style)
-            self.ui.successfulTable.setColumnCount(len(results[0]))
-            self.ui.successfulTable.setRowCount(len(results))
-            self.ui.successfulTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
-            self.ui.successfulTable.resizeColumnsToContents()
-            self.ui.successfulTable.setColumnWidth(0,300)
-            self.ui.successfulTable.setColumnWidth(1,100)
-            self.ui.successfulTable.setColumnWidth(2,50)
-            currentRow = 0
-            for row in results:
-                for colCount in range(0, len(results[0])):
-                    self.ui.successfulTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
-                currentRow +=1
+            try:
+                print(sql_str)
+                results = self.executeQuery(sql_str)
+                style = "::section {""background-color: #f3f3f3; }"
+                self.ui.successfulTable.horizontalHeader().setStyleSheet(style)
+                self.ui.successfulTable.setColumnCount(len(results[0]))
+                self.ui.successfulTable.setRowCount(len(results))
+                self.ui.successfulTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
+                self.ui.successfulTable.resizeColumnsToContents()
+                self.ui.successfulTable.setColumnWidth(0,300)
+                self.ui.successfulTable.setColumnWidth(1,100)
+                self.ui.successfulTable.setColumnWidth(2,50)
+                currentRow = 0
+                for row in results:
+                    for colCount in range(0, len(results[0])):
+                        self.ui.successfulTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
+                    currentRow +=1
+            except:
+                print("Success table failed")
 
             # Popular Business Table
             sql_str = "SELECT Business.name, Business.city, Business.state FROM Business JOIN (SELECT AVG(numCheckins) AS avgCheckins, postal_code FROM Business GROUP BY postal_code) AS Average ON Business.postal_code = Average.postal_code WHERE numCheckins > avgCheckins AND Business.postal_code = " + str(zip) +" ORDER BY Business.reviewrating;"
             for i in reversed(range(self.ui.popularTable.rowCount())):
                 self.ui.popularTable.removeRow(i)
-            
-            print(i)
-            print(sql_str)
-            results = self.executeQuery(sql_str)
-            style = "::section {""background-color: #f3f3f3; }"
-            self.ui.popularTable.horizontalHeader().setStyleSheet(style)
-            self.ui.popularTable.setColumnCount(len(results[0]))
-            self.ui.popularTable.setRowCount(len(results))
-            self.ui.popularTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
-            self.ui.popularTable.resizeColumnsToContents()
-            self.ui.popularTable.setColumnWidth(0,300)
-            self.ui.popularTable.setColumnWidth(1,100)
-            self.ui.popularTable.setColumnWidth(2,50)
-            currentRow = 0
-            for row in results:
-                for colCount in range(0, len(results[0])):
-                    self.ui.popularTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
-                currentRow +=1
+            try:
+                print(sql_str)
+                results = self.executeQuery(sql_str)
+                style = "::section {""background-color: #f3f3f3; }"
+                self.ui.popularTable.horizontalHeader().setStyleSheet(style)
+                self.ui.popularTable.setColumnCount(len(results[0]))
+                self.ui.popularTable.setRowCount(len(results))
+                self.ui.popularTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
+                self.ui.popularTable.resizeColumnsToContents()
+                self.ui.popularTable.setColumnWidth(0,300)
+                self.ui.popularTable.setColumnWidth(1,100)
+                self.ui.popularTable.setColumnWidth(2,50)
+                currentRow = 0
+                for row in results:
+                    for colCount in range(0, len(results[0])):
+                        self.ui.popularTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
+                    currentRow +=1
+            except:
+                print("Popular table failed")
 
     def categoryChanged(self):
-                    
-                
+        if (len(self.ui.cityList.selectedItems()) > 0) and (len(self.ui.zipList.selectedItems()) > 0 and len(self.ui.categoryList.selectedItems()) > 0):
+            state = self.ui.stateList.currentText()
+            city = self.ui.cityList.selectedItems()[0].text()
+            zip = self.ui.zipList.selectedItems()[0].text()
+            category = self.ui.categoryList.selectedItems()[0].text()
+            sql_str ="SELECT name, city, state FROM business JOIN Categories ON Business.business_id = Categories.business_id WHERE city='" + city + "' AND state='" + state + "' AND postal_code=" + zip + " AND category_name = '" + category  + "' ORDER BY name;" 
+            for i in reversed(range(self.ui.businessTable.rowCount())):
+                self.ui.businessTable.removeRow(i)
+            try:    
+                print(i)
+                results = self.executeQuery(sql_str)
+                print(sql_str)
+                style = "::section {""background-color: #f3f3f3; }"
+                self.ui.businessTable.horizontalHeader().setStyleSheet(style)
+                self.ui.businessTable.setColumnCount(len(results[0]))
+                self.ui.businessTable.setRowCount(len(results))
+                self.ui.businessTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
+                self.ui.businessTable.resizeColumnsToContents()
+                self.ui.businessTable.setColumnWidth(0,300)
+                self.ui.businessTable.setColumnWidth(1,100)
+                self.ui.businessTable.setColumnWidth(2,50)
+                currentRow = 0
+                print("u")
+                for row in results:
+                    for colCount in range(0, len(results[0])):
+                        self.ui.businessTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
+                    currentRow +=1
+            except:
+                print("category Query Failed")
+
 #sql query for popular categories - needs to be based on the state, city, zip
 # """SELECT category_name, COUNT(category_name)
 # FROM categories as cat
