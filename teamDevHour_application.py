@@ -48,6 +48,12 @@ class milestone1(QMainWindow):
         self.ui.zipList.clear()
         self.ui.categoryList.clear()
         state = self.ui.stateList.currentText()
+        for i in reversed(range(self.ui.popularTable.rowCount())):
+            self.ui.popularTable.removeRow(i)
+        for i in reversed(range(self.ui.successfulTable.rowCount())):
+            self.ui.successfulTable.removeRow(i)
+        for i in reversed(range(self.ui.categoryTable.rowCount())):
+            self.ui.categoryTable.removeRow(i)
         if (self.ui.stateList.currentIndex() >= 0):
             sql_str = "SELECT DISTINCT city FROM business WHERE state='" + state + "' ORDER BY city;"
             try:
@@ -84,6 +90,13 @@ class milestone1(QMainWindow):
     def cityChanged(self):
         self.ui.zipList.clear()
         self.ui.categoryList.clear()
+        for i in reversed(range(self.ui.popularTable.rowCount())):
+            self.ui.popularTable.removeRow(i)
+        for i in reversed(range(self.ui.successfulTable.rowCount())):
+            self.ui.successfulTable.removeRow(i)
+        for i in reversed(range(self.ui.categoryTable.rowCount())):
+            self.ui.categoryTable.removeRow(i)
+
         if (self.ui.stateList.currentIndex() >=0 ) and (len(self.ui.cityList.selectedItems()) > 0):
             city = self.ui.cityList.selectedItems()[0].text()
             state = self.ui.stateList.currentText()
@@ -129,7 +142,6 @@ class milestone1(QMainWindow):
             for i in reversed(range(self.ui.businessTable.rowCount())):
                 self.ui.businessTable.removeRow(i)
             try:
-                print(i)
                 results = self.executeQuery(sql_str)
                 print(sql_str)
                 style = "::section {""background-color: #f3f3f3; }"
@@ -149,16 +161,13 @@ class milestone1(QMainWindow):
                     currentRow +=1
             except:
                 print("business Query Failed")
-            sql_str = "SELECT DISTINCT category_name FROM Business JOIN Categories ON Business.business_id = Categories.business_id WHERE postal_code = "  + zip + " ORDER BY category_name;"
-            # try:
+
+            sql_str = "SELECT DISTINCT category_name FROM Business JOIN Categories ON Business.business_id = Categories.business_id WHERE city = '"+ city + "' AND postal_code = "  + zip + " ORDER BY category_name;"
             print(sql_str)
-            results = self.executeQuery(sql_str)
-            
+            results = self.executeQuery(sql_str) 
             for row in results:
                 self.ui.categoryList.addItem(str(row[0]))
-            # except:
-            #     print("category Query Failed")
-        
+
             sql_str = "SELECT meanincome FROM zipcodedata WHERE zipcode = '" + str(zip) + "';"
             try:
                 results = self.executeQuery(sql_str)
@@ -187,8 +196,6 @@ class milestone1(QMainWindow):
             sql_str = "SELECT category_name, COUNT(category_name) FROM categories as cat JOIN business as bus ON cat.business_id = bus.business_id WHERE postal_code = " + str(zip) + " GROUP BY category_name ORDER BY COUNT(category_name) DESC"
             for i in reversed(range(self.ui.categoryTable.rowCount())):
                 self.ui.categoryTable.removeRow(i)
-            
-            print(i)
             results = self.executeQuery(sql_str)
             print(sql_str)
             style = "::section {""background-color: #f3f3f3; }"
@@ -255,7 +262,7 @@ class milestone1(QMainWindow):
                 print("Popular table failed")
 
     def categoryChanged(self):
-        if (len(self.ui.cityList.selectedItems()) > 0) and (len(self.ui.zipList.selectedItems()) > 0 and len(self.ui.categoryList.selectedItems()) > 0):
+        if (len(self.ui.zipList.selectedItems()) > 0 and len(self.ui.categoryList.selectedItems()) > 0):
             state = self.ui.stateList.currentText()
             city = self.ui.cityList.selectedItems()[0].text()
             zip = self.ui.zipList.selectedItems()[0].text()
@@ -264,7 +271,6 @@ class milestone1(QMainWindow):
             for i in reversed(range(self.ui.businessTable.rowCount())):
                 self.ui.businessTable.removeRow(i)
             try:    
-                print(i)
                 results = self.executeQuery(sql_str)
                 print(sql_str)
                 style = "::section {""background-color: #f3f3f3; }"
