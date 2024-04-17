@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1078</width>
-    <height>1034</height>
+    <width>1075</width>
+    <height>898</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -323,9 +323,9 @@ background-color: rgb(181, 206, 227);</string>
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>30</y>
+         <y>20</y>
          <width>91</width>
-         <height>21</height>
+         <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -340,7 +340,7 @@ background-color: rgb(181, 206, 227);</string>
         <rect>
          <x>20</x>
          <y>50</y>
-         <width>191</width>
+         <width>131</width>
          <height>241</height>
         </rect>
        </property>
@@ -349,32 +349,12 @@ background-color: rgb(181, 206, 227);</string>
 font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="filterButton">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>50</y>
-         <width>71</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(240, 255, 238);
-</string>
-       </property>
-       <property name="text">
-        <string>Filter</string>
-       </property>
-      </widget>
       <widget class="QTableWidget" name="businessTable">
        <property name="geometry">
         <rect>
-         <x>300</x>
+         <x>170</x>
          <y>50</y>
-         <width>741</width>
+         <width>871</width>
          <height>241</height>
         </rect>
        </property>
@@ -395,10 +375,10 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
       <widget class="QLabel" name="label_9">
        <property name="geometry">
         <rect>
-         <x>300</x>
-         <y>30</y>
+         <x>170</x>
+         <y>20</y>
          <width>91</width>
-         <height>16</height>
+         <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -414,8 +394,8 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
        <rect>
         <x>10</x>
         <y>540</y>
-        <width>1061</width>
-        <height>351</height>
+        <width>1051</width>
+        <height>271</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -432,7 +412,7 @@ background-color: rgb(181, 206, 227);</string>
          <x>20</x>
          <y>50</y>
          <width>481</width>
-         <height>291</height>
+         <height>211</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -455,7 +435,7 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
          <x>560</x>
          <y>50</y>
          <width>481</width>
-         <height>291</height>
+         <height>211</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -520,7 +500,7 @@ font: 10pt &quot;Lucida Sans Unicode&quot;;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1078</width>
+     <width>1075</width>
      <height>21</height>
     </rect>
    </property>
