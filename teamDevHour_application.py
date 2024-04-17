@@ -84,22 +84,26 @@ class milestone1(QMainWindow):
             except:
                 print("SC Query Failed")
 
-        sql_str ="SELECT name, city, state FROM business WHERE state= '" + state + "' ORDER BY name;" 
+        sql_str ="SELECT name, address, city, stars, review_count, reviewrating, numcheckins FROM business WHERE state= '" + state + "' ORDER BY name;" 
         try:
             results = self.executeQuery(sql_str)
             style = "::section {""background-color: #f3f3f3; }"
             self.ui.businessTable.horizontalHeader().setStyleSheet(style)
             self.ui.businessTable.setColumnCount(len(results[0]))
             self.ui.businessTable.setRowCount(len(results))
-            self.ui.businessTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
+            self.ui.businessTable.setHorizontalHeaderLabels(['Business Name', 'Address', 'City', 'Stars', 'Review Count', 'Review Rating', 'Number of Checkins'])
             self.ui.businessTable.resizeColumnsToContents()
-            self.ui.businessTable.setColumnWidth(0,300)
-            self.ui.businessTable.setColumnWidth(1,100)
-            self.ui.businessTable.setColumnWidth(2,50)
+            self.ui.businessTable.setColumnWidth(0,200)
+            self.ui.businessTable.setColumnWidth(1,150)
+            self.ui.businessTable.setColumnWidth(2,100)
+            self.ui.businessTable.setColumnWidth(3,50)
+            self.ui.businessTable.setColumnWidth(4,100)
+            self.ui.businessTable.setColumnWidth(5,100)
+            self.ui.businessTable.setColumnWidth(6,60)
             currentRow = 0
             for row in results:
                 for colCount in range(0, len(results[0])):
-                    self.ui.businessTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
+                    self.ui.businessTable.setItem(currentRow, colCount, QTableWidgetItem(str(row[colCount])))
                 currentRow +=1
         except:
             print("SC2 Query Failed")
@@ -120,7 +124,7 @@ class milestone1(QMainWindow):
                     self.ui.zipList.addItem(str(row[0]))
             except:
                 print("zip Query Failed")
-            sql_str ="SELECT name, city, state FROM business WHERE city='" + city + "' AND state='" + state + "' ORDER BY name;" 
+            sql_str ="SELECT name, address, city, stars, review_count, reviewrating, numcheckins FROM business WHERE city='" + city + "' AND state='" + state + "' ORDER BY name;" 
             self.clearTable(self.ui.businessTable)
             try:
                 results = self.executeQuery(sql_str)
@@ -128,15 +132,19 @@ class milestone1(QMainWindow):
                 self.ui.businessTable.horizontalHeader().setStyleSheet(style)
                 self.ui.businessTable.setColumnCount(len(results[0]))
                 self.ui.businessTable.setRowCount(len(results))
-                self.ui.businessTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
+                self.ui.businessTable.setHorizontalHeaderLabels(['Business Name', 'Address', 'City', 'Stars', 'Review Count', 'Review Rating', 'Number of Checkins'])
                 self.ui.businessTable.resizeColumnsToContents()
-                self.ui.businessTable.setColumnWidth(0,300)
-                self.ui.businessTable.setColumnWidth(1,100)
-                self.ui.businessTable.setColumnWidth(2,50)
+                self.ui.businessTable.setColumnWidth(0,200)
+                self.ui.businessTable.setColumnWidth(1,150)
+                self.ui.businessTable.setColumnWidth(2,100)
+                self.ui.businessTable.setColumnWidth(3,50)
+                self.ui.businessTable.setColumnWidth(4,100)
+                self.ui.businessTable.setColumnWidth(5,100)
+                self.ui.businessTable.setColumnWidth(6,60)
                 currentRow = 0
                 for row in results:
                     for colCount in range(0, len(results[0])):
-                        self.ui.businessTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
+                        self.ui.businessTable.setItem(currentRow, colCount, QTableWidgetItem(str(row[colCount])))
                     currentRow +=1
             except:
                 print("CC Query Failed")
@@ -150,24 +158,27 @@ class milestone1(QMainWindow):
             state = self.ui.stateList.currentText()
             city = self.ui.cityList.selectedItems()[0].text()
             zip = self.ui.zipList.selectedItems()[0].text()
-            sql_str ="SELECT name, city, state FROM business WHERE city='" + city + "' AND state='" + state + "' AND postal_code=" + zip + " ORDER BY name;" 
+            sql_str ="SELECT name, address, city, stars, review_count, reviewrating, numcheckins FROM business WHERE city='" + city + "' AND state='" + state + "' AND postal_code=" + zip + " ORDER BY name;" 
             self.clearTable(self.ui.businessTable)
             try:
                 results = self.executeQuery(sql_str)
-                print(sql_str)
                 style = "::section {""background-color: #f3f3f3; }"
                 self.ui.businessTable.horizontalHeader().setStyleSheet(style)
                 self.ui.businessTable.setColumnCount(len(results[0]))
                 self.ui.businessTable.setRowCount(len(results))
-                self.ui.businessTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
+                self.ui.businessTable.setHorizontalHeaderLabels(['Business Name', 'Address', 'City', 'Stars', 'Review Count', 'Review Rating', 'Number of Checkins'])
                 self.ui.businessTable.resizeColumnsToContents()
-                self.ui.businessTable.setColumnWidth(0,300)
-                self.ui.businessTable.setColumnWidth(1,100)
-                self.ui.businessTable.setColumnWidth(2,50)
+                self.ui.businessTable.setColumnWidth(0,200)
+                self.ui.businessTable.setColumnWidth(1,150)
+                self.ui.businessTable.setColumnWidth(2,100)
+                self.ui.businessTable.setColumnWidth(3,50)
+                self.ui.businessTable.setColumnWidth(4,100)
+                self.ui.businessTable.setColumnWidth(5,100)
+                self.ui.businessTable.setColumnWidth(6,60)
                 currentRow = 0
                 for row in results:
                     for colCount in range(0, len(results[0])):
-                        self.ui.businessTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
+                        self.ui.businessTable.setItem(currentRow, colCount, QTableWidgetItem(str(row[colCount])))
                     currentRow +=1
             except:
                 print("business Query Failed")
@@ -214,7 +225,7 @@ class milestone1(QMainWindow):
             self.ui.categoryTable.setHorizontalHeaderLabels(['Category Name', '# of Businesses'])
             self.ui.categoryTable.resizeColumnsToContents()
             self.ui.categoryTable.setColumnWidth(0,200)
-            self.ui.categoryTable.setColumnWidth(1,161)
+            self.ui.categoryTable.setColumnWidth(1,155)
             currentRow = 0
             for row in results:
                 for colCount in range(0, len(results[0])):
@@ -222,7 +233,7 @@ class milestone1(QMainWindow):
                 currentRow +=1
             
             # Successful Business Table
-            sql_str = "SELECT name, city, state AS avgReviewCount FROM Business JOIN Categories AS Cat on Business.business_id = Cat.business_id JOIN(SELECT AVG(review_count) AS averageReviews, category_name FROM Business JOIN Categories on Business.business_id = Categories.business_id GROUP BY category_name) AS Average ON Average.category_name = Cat.category_name GROUP BY Business.business_id, business.name HAVING review_count > AVG(averageReviews) AND reviewrating >= 4.0 AND postal_code = " + str(zip) + " ORDER BY reviewrating DESC"
+            sql_str = "SELECT name, city, reviewrating, review_count AS avgReviewCount FROM Business JOIN Categories AS Cat on Business.business_id = Cat.business_id JOIN(SELECT AVG(review_count) AS averageReviews, category_name FROM Business JOIN Categories on Business.business_id = Categories.business_id GROUP BY category_name) AS Average ON Average.category_name = Cat.category_name GROUP BY Business.business_id, business.name HAVING review_count > AVG(averageReviews) AND reviewrating >= 4.0 AND postal_code = " + str(zip) + " ORDER BY reviewrating DESC"
             self.clearTable(self.ui.successfulTable)
             try:
                 print(sql_str)
@@ -231,21 +242,22 @@ class milestone1(QMainWindow):
                 self.ui.successfulTable.horizontalHeader().setStyleSheet(style)
                 self.ui.successfulTable.setColumnCount(len(results[0]))
                 self.ui.successfulTable.setRowCount(len(results))
-                self.ui.successfulTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
+                self.ui.successfulTable.setHorizontalHeaderLabels(['Business Name', 'City', 'Average Rating', 'Review Count'])
                 self.ui.successfulTable.resizeColumnsToContents()
-                self.ui.successfulTable.setColumnWidth(0,300)
+                self.ui.successfulTable.setColumnWidth(0,150)
                 self.ui.successfulTable.setColumnWidth(1,100)
-                self.ui.successfulTable.setColumnWidth(2,50)
+                self.ui.successfulTable.setColumnWidth(2,110)
+                self.ui.successfulTable.setColumnWidth(3,50)
                 currentRow = 0
                 for row in results:
                     for colCount in range(0, len(results[0])):
-                        self.ui.successfulTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
+                        self.ui.successfulTable.setItem(currentRow, colCount, QTableWidgetItem(str(row[colCount])))
                     currentRow +=1
             except:
                 print("Success table failed")
 
             # Popular Business Table
-            sql_str = "SELECT Business.name, Business.city, Business.state FROM Business JOIN (SELECT AVG(numCheckins) AS avgCheckins, postal_code FROM Business GROUP BY postal_code) AS Average ON Business.postal_code = Average.postal_code WHERE numCheckins > avgCheckins AND Business.postal_code = " + str(zip) +" ORDER BY Business.reviewrating;"
+            sql_str = "SELECT Business.name, Business.city, Business.stars, numCheckins FROM Business JOIN (SELECT AVG(numCheckins) AS avgCheckins, postal_code FROM Business GROUP BY postal_code) AS Average ON Business.postal_code = Average.postal_code WHERE numCheckins > avgCheckins AND Business.postal_code = " + str(zip) +" ORDER BY Business.reviewrating;"
             self.clearTable(self.ui.popularTable)
             try:
                 print(sql_str)
@@ -254,15 +266,16 @@ class milestone1(QMainWindow):
                 self.ui.popularTable.horizontalHeader().setStyleSheet(style)
                 self.ui.popularTable.setColumnCount(len(results[0]))
                 self.ui.popularTable.setRowCount(len(results))
-                self.ui.popularTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
+                self.ui.popularTable.setHorizontalHeaderLabels(['Business Name', 'City', 'Stars', '# of Checkins'])
                 self.ui.popularTable.resizeColumnsToContents()
-                self.ui.popularTable.setColumnWidth(0,300)
+                self.ui.popularTable.setColumnWidth(0,190)
                 self.ui.popularTable.setColumnWidth(1,100)
-                self.ui.popularTable.setColumnWidth(2,50)
+                self.ui.popularTable.setColumnWidth(2,70)
+                self.ui.popularTable.setColumnWidth(3,100)
                 currentRow = 0
                 for row in results:
                     for colCount in range(0, len(results[0])):
-                        self.ui.popularTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
+                        self.ui.popularTable.setItem(currentRow, colCount, QTableWidgetItem(str(row[colCount])))
                     currentRow +=1
             except:
                 print("Popular table failed")
@@ -273,24 +286,27 @@ class milestone1(QMainWindow):
             city = self.ui.cityList.selectedItems()[0].text()
             zip = self.ui.zipList.selectedItems()[0].text()
             category = self.ui.categoryList.selectedItems()[0].text()
-            sql_str ="SELECT name, city, state FROM business JOIN Categories ON Business.business_id = Categories.business_id WHERE city='" + city + "' AND state='" + state + "' AND postal_code=" + zip + " AND category_name = '" + category  + "' ORDER BY name;" 
+            sql_str ="SELECT name, address, city, stars, review_count, reviewrating, numcheckins FROM business JOIN Categories ON Business.business_id = Categories.business_id WHERE city='" + city + "' AND state='" + state + "' AND postal_code=" + zip + " AND category_name = '" + category  + "' ORDER BY name;" 
             self.clearTable(self.ui.businessTable)
             try:    
                 results = self.executeQuery(sql_str)
-                print(sql_str)
                 style = "::section {""background-color: #f3f3f3; }"
                 self.ui.businessTable.horizontalHeader().setStyleSheet(style)
                 self.ui.businessTable.setColumnCount(len(results[0]))
                 self.ui.businessTable.setRowCount(len(results))
-                self.ui.businessTable.setHorizontalHeaderLabels(['Business Name', 'City', 'State'])
+                self.ui.businessTable.setHorizontalHeaderLabels(['Business Name', 'Address', 'City', 'Stars', 'Review Count', 'Review Rating', 'Number of Checkins'])
                 self.ui.businessTable.resizeColumnsToContents()
-                self.ui.businessTable.setColumnWidth(0,300)
-                self.ui.businessTable.setColumnWidth(1,100)
-                self.ui.businessTable.setColumnWidth(2,50)
+                self.ui.businessTable.setColumnWidth(0,200)
+                self.ui.businessTable.setColumnWidth(1,150)
+                self.ui.businessTable.setColumnWidth(2,100)
+                self.ui.businessTable.setColumnWidth(3,50)
+                self.ui.businessTable.setColumnWidth(4,100)
+                self.ui.businessTable.setColumnWidth(5,100)
+                self.ui.businessTable.setColumnWidth(6,60)
                 currentRow = 0
                 for row in results:
                     for colCount in range(0, len(results[0])):
-                        self.ui.businessTable.setItem(currentRow, colCount, QTableWidgetItem(row[colCount]))
+                        self.ui.businessTable.setItem(currentRow, colCount, QTableWidgetItem(str(row[colCount])))
                     currentRow +=1
             except:
                 print("category Query Failed")
